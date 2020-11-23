@@ -39,7 +39,6 @@
 		8B4CCF33255D406100EA923C /* ThemesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4CCF32255D406100EA923C /* ThemesVC.swift */; };
 		8B4CCF38255D406E00EA923C /* TrendingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4CCF37255D406E00EA923C /* TrendingVC.swift */; };
 		8B4CCF40255D4AA900EA923C /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4CCF3F255D4AA900EA923C /* Extension+UIView.swift */; };
-		8B4CCF45255D525C00EA923C /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4CCF44255D525C00EA923C /* LabelCell.swift */; };
 		8B4CCF4A255D602700EA923C /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4CCF49255D602700EA923C /* CategoryCell.swift */; };
 		8B4D00AE255E558C0014D8BF /* ThemesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D00AD255E558C0014D8BF /* ThemesCell.swift */; };
 		8B4FAC55255FDBE300292CA1 /* TrendingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4FAC54255FDBE300292CA1 /* TrendingResponse.swift */; };
@@ -102,7 +101,6 @@
 		8B4CCF32255D406100EA923C /* ThemesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesVC.swift; sourceTree = "<group>"; };
 		8B4CCF37255D406E00EA923C /* TrendingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingVC.swift; sourceTree = "<group>"; };
 		8B4CCF3F255D4AA900EA923C /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
-		8B4CCF44255D525C00EA923C /* LabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
 		8B4CCF49255D602700EA923C /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		8B4D00AD255E558C0014D8BF /* ThemesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesCell.swift; sourceTree = "<group>"; };
 		8B4FAC54255FDBE300292CA1 /* TrendingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingResponse.swift; sourceTree = "<group>"; };
@@ -300,7 +298,6 @@
 			isa = PBXGroup;
 			children = (
 				8B4CCEF9255D25E900EA923C /* TabView.swift */,
-				8B4CCF44255D525C00EA923C /* LabelCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -487,7 +484,6 @@
 				8B2C6998256B890900AA76AC /* TrendingVM.swift in Sources */,
 				8B4CCF33255D406100EA923C /* ThemesVC.swift in Sources */,
 				8B2C69B5256B98AF00AA76AC /* TrendingCellVM.swift in Sources */,
-				8B4CCF45255D525C00EA923C /* LabelCell.swift in Sources */,
 				8B4CCF07255D381000EA923C /* BaseVC.swift in Sources */,
 				8B4CCF0C255D385200EA923C /* Extension+UIViewController.swift in Sources */,
 				8B4FC56F256B825200642C45 /* CategoryVM.swift in Sources */,
