@@ -11,7 +11,7 @@ class ThemesVC: UIViewController {
 
     fileprivate var collectionView: UICollectionView!
 
-    fileprivate var themes = [Theme]()
+    fileprivate var themesVM = ThemesVM()
 
     override func loadView() {
         super.loadView()
@@ -24,18 +24,12 @@ class ThemesVC: UIViewController {
 
         // Do any additional setup after loading the view.
         view.backgroundColor = .appBackgroundColor
-        fetchData()
-    }
-
-    private func fetchData() {
-        if let data = FileHelper.getJSON(contoller: self) {
-            do {
-                let fetchthemes = try JSONDecoder().decode([Theme].self, from: data)
-                themes = fetchthemes
-                collectionView.reloadData()
-            } catch {
-                showAlert(title: "", message: error.localizedDescription)
+        themesVM.fetchData { (success, error) in
+            if let error = error, error.count > 0 {
+                self.showAlert(title: "", message: error)
+                return
             }
+            self.collectionView.reloadData()
         }
     }
 }
@@ -62,18 +56,18 @@ extension ThemesVC {
 extension ThemesVC: UICollectionViewDataSource {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return themesVM.getNumberOfSectionInTableView()
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return themes.count
+        return themesVM.numberOfRowsInTableView()
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ThemesCell.id, for: indexPath) as? ThemesCell else {
             return UICollectionViewCell()
         }
-        cell.configureView(theme: themes[indexPath.row])
+        cell.configureView(themesCellVM: themesVM.getThemeCellVM(atIndex: indexPath.row))
 
         return cell
     }

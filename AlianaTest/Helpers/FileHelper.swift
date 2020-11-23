@@ -10,13 +10,13 @@ import UIKit
 
 class FileHelper {
 
-    static func getJSON(contoller: UIViewController) -> Data? {
+    static func getJSON(viewModel: Any) -> Data? {
         var fileName = ""
-        if contoller is CategoryVC {
+        if viewModel is CategoryVM {
             fileName = "Category"
-        } else if contoller is ThemesVC {
+        } else if viewModel is ThemesVM {
             fileName = "Themes"
-        } else if contoller is TrendingVC {
+        } else if viewModel is TrendingVM {
             fileName = "Trending"
         }
         if let path = Bundle.main.path(forResource: fileName, ofType: "json") {

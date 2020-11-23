@@ -11,7 +11,7 @@ class TrendingVC: UIViewController {
 
     fileprivate var tableView = UITableView()
 
-    fileprivate var trendingResponse = [TrendingResponse]()
+    fileprivate var trendingVM = TrendingVM()
 
     override func loadView() {
         super.loadView()
@@ -23,18 +23,12 @@ class TrendingVC: UIViewController {
 
         // Do any additional setup after loading the view.
         view.backgroundColor = .appBackgroundColor
-        fetchData()
-    }
-
-    private func fetchData() {
-        if let data = FileHelper.getJSON(contoller: self) {
-            do {
-                let fetchresponse = try JSONDecoder().decode([TrendingResponse].self, from: data)
-                trendingResponse = fetchresponse
-                tableView.reloadData()
-            } catch {
-                showAlert(title: "", message: error.localizedDescription)
+        trendingVM.fetchData { (success, error) in
+            if let error = error, error.count > 0 {
+                self.showAlert(title: "", message: error)
+                return
             }
+            self.tableView.reloadData()
         }
     }
 }
@@ -65,18 +59,18 @@ extension TrendingVC {
 extension TrendingVC: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return trendingResponse.count
+        return trendingVM.getNumberOfSectionInTableView()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return trendingResponse[section].trendings.count
+        return trendingVM.numberOfRowsInTableView(section: section)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TrendingCell.id, for: indexPath) as? TrendingCell else {
             return UITableViewCell()
         }
-        cell.configureView(trending: trendingResponse[indexPath.section].trendings[indexPath.row])
+        cell.configureView(trending: trendingVM.getTrending(atSection: indexPath.section, atRow: indexPath.row))
         cell.selectionStyle = .none
         cell.setCornerRadiusForBgView(corners: [], radius: 0)
         cell.setBottomBorderColor(color: UIColor.lightGray)
@@ -128,7 +122,7 @@ extension TrendingVC: UITableViewDelegate {
         label.textColor = UIColor.black
         label.font = UIFont.medium(16)
         label.textAlignment = .left
-        label.text = trendingResponse[section].title ?? ""
+        label.text = trendingVM.getHeaderTitle(section: section)
         NSLayoutConstraint.activate(
             [
                 label.leadingAnchor.constraint(equalTo: bgview.leadingAnchor, constant: 16),

@@ -14,6 +14,12 @@ class ThemesCell: UICollectionViewCell {
     fileprivate var imgView = UIImageView()
     fileprivate var titleLabel = UILabel()
 
+    fileprivate var themesCellVM: ThemesCellVM! {
+        didSet {
+            setupView()
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -27,13 +33,17 @@ class ThemesCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configureView(theme: Theme) {
+    func configureView(themesCellVM: ThemesCellVM) {
+        self.themesCellVM = themesCellVM
+    }
+
+    private func setupView() {
         titleLabel.text = nil
         imgView.image = nil
-        if let title = theme.title {
+        if let title = themesCellVM.title {
             titleLabel.text = title
         }
-        if let icon = theme.icon {
+        if let icon = themesCellVM.imageName {
             imgView.image = UIImage(named: icon)
         }
     }

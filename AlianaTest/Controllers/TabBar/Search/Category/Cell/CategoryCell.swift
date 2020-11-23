@@ -11,6 +11,12 @@ class CategoryCell: UITableViewCell {
 
     static let id = String.init(describing: CategoryCell.self)
 
+    fileprivate var categoryCellVM: CategoryCellVM! {
+        didSet {
+            setupView()
+        }
+    }
+
     fileprivate var bgContentView = UIView()
     fileprivate var bgView = UIView()
     fileprivate var imgView = UIImageView()
@@ -40,18 +46,22 @@ class CategoryCell: UITableViewCell {
         }
     }
 
-    func configureView(category: Category) {
+    func configureView(categoryCellVM: CategoryCellVM) {
+        self.categoryCellVM = categoryCellVM
+    }
+
+    private func setupView() {
         titleLabel.text = nil
         imgView.image = nil
         bgView.backgroundColor = UIColor.appBlueColor
         imgView.setBorder(color: UIColor.white, width: 2)
-        if let title = category.title {
+        if let title = categoryCellVM.title {
             titleLabel.text = title
         }
-        if let color = category.bgColor {
+        if let color = categoryCellVM.bgColorCode {
             bgView.backgroundColor = UIColor(hex: color)
         }
-        if let icon = category.icon {
+        if let icon = categoryCellVM.imageName {
             imgView.image = UIImage(named: icon)
         }
     }
