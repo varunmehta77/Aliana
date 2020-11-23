@@ -11,6 +11,12 @@ class TrendingCell: UITableViewCell {
 
     static let id = String.init(describing: TrendingCell.self)
 
+    fileprivate var trendingCellVM: TrendingCellVM! {
+        didSet {
+            setupView()
+        }
+    }
+
     fileprivate var bgView = UIView()
     fileprivate var imgView = UIImageView()
     fileprivate var titleLabel = UILabel()
@@ -43,19 +49,23 @@ class TrendingCell: UITableViewCell {
         }
     }
 
-    func configureView(trending: Trending) {
+    func configureView(trendingCellVM: TrendingCellVM) {
+        self.trendingCellVM = trendingCellVM
+    }
+
+    private func setupView() {
         titleLabel.text = nil
         subtitleLabel.text = nil
         imgView.image = nil
         percentLabel.backgroundColor = UIColor.lightGray
         percentLabel.text = nil
-        if let text = trending.title {
+        if let text = trendingCellVM.title {
             titleLabel.text = text
         }
-        if let text = trending.subTitle {
+        if let text = trendingCellVM.subTitle {
             subtitleLabel.text = text
         }
-        if let value = trending.percentChange {
+        if let value = trendingCellVM.percentChange {
             percentLabel.text = (value > 0) ? "+" + String(value) : String(value)
             if value > 0 {
                 percentLabel.backgroundColor = UIColor.appBackgroundGreenColor
@@ -63,7 +73,7 @@ class TrendingCell: UITableViewCell {
                 percentLabel.backgroundColor = UIColor.appBackgroundRedColor
             }
         }
-        if let icon = trending.icon {
+        if let icon = trendingCellVM.imageName {
             imgView.image = UIImage(named: icon)
         }
     }

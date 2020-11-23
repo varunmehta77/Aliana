@@ -34,8 +34,11 @@ extension TrendingVM {
         return trendingResponse[section].trendings.count
     }
 
-    func getTrending(atSection section: Int, atRow row: Int) -> Trending {
-        return trendingResponse[section].trendings[row]
+    func getTrendingCellVM(atSection section: Int, atRow row: Int) -> TrendingCellVM {
+        let trending = trendingResponse[section].trendings[row]
+        return TrendingCellVM(
+            title: trending.title, subTitle: trending.subTitle, imageName: trending.icon, percentChange: trending.percentChange, quantity: trending.quantity
+        )
     }
 
     func getHeaderTitle(section: Int) -> String? {

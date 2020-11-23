@@ -70,7 +70,7 @@ extension TrendingVC: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TrendingCell.id, for: indexPath) as? TrendingCell else {
             return UITableViewCell()
         }
-        cell.configureView(trending: trendingVM.getTrending(atSection: indexPath.section, atRow: indexPath.row))
+        cell.configureView(trendingCellVM: trendingVM.getTrendingCellVM(atSection: indexPath.section, atRow: indexPath.row))
         cell.selectionStyle = .none
         cell.setCornerRadiusForBgView(corners: [], radius: 0)
         cell.setBottomBorderColor(color: UIColor.lightGray)
